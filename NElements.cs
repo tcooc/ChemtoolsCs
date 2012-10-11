@@ -1,6 +1,3 @@
-/**
- * @author tcooc
-**/
 using System.Text;
 	
 namespace ChemTools {

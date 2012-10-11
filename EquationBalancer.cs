@@ -1,6 +1,3 @@
-/**
- * @author tcooc
-**/
 namespace ChemTools {
 
 	/// <summary> USed for balancing equations. </summary>

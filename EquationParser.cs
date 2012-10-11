@@ -1,6 +1,3 @@
-/**
- * @author tcooc
-**/
 namespace ChemTools {
 
 	/// <summary> Parses equation strings into Equations </summary>
