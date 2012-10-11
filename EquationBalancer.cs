@@ -1,5 +1,5 @@
 /**
- * @author Steven Wang
+ * @author tcooc
 **/
 namespace ChemTools {
 
