@@ -9,9 +9,9 @@ namespace ChemTools {
 		public const string EQUATION_TOKEN = "=";
 		/// <summary> Token that separates 2 formulas. </summary>
 		public const string TERM_TOKEN = "+";
-		
+
 		private string[] left, right;
-		
+
 		private EquationParser(string str) {
 			//divides equations string into left and right sides
 			//and further divides it into formula strings
@@ -39,5 +39,5 @@ namespace ChemTools {
 			return new EquationParser(str).GetEquation();
 		}
 	}
-	
+
 }

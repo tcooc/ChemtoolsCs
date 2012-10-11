@@ -16,16 +16,16 @@ namespace ChemTools {
 		//and can later be retrieved by using
 		//elementMap[e]
 		private Dictionary<Element, NElements> elementMap = new Dictionary<Element, NElements>();
-		
+
 		/// <summary> Default empty formula </summary>
 		public Formula() {}
-		
+
 		/// <summary> Copy constructor. </summary>
 		/// <param name="f"> Formula to copy. </param>
 		public Formula(Formula f) {
 			MergeFormula(f);
 		}
-		
+
 		/// <summary> Gets molar mass of the formula </summary>
 		public double MolarMass {
 			get {
@@ -37,14 +37,14 @@ namespace ChemTools {
 			}
 			private set {}
 		}
-		
+
 		public Dictionary<Element, NElements> Elements {
 			get {
 				return elementMap;
 			}
 			private set {}
 		}
-		
+
 		/// <summary> Merges this formula with other.
 		/// Result is this object; other isn't affected. </summary>
 		/// <example> H2O merged with H2 will result in H4O </example>
@@ -64,7 +64,7 @@ namespace ChemTools {
 			}
 			return this;
 		}
-		
+
 		/// <summary> Adds one or more elements to the formula. </summary>
 		/// <example> H2 Add(O) results in H2O </example>
 		public void Add(NElements ne) {
@@ -75,7 +75,7 @@ namespace ChemTools {
 				elementMap.Add(ne.Element, ne);
 			}
 		}
-		
+
 		/// <summary> Gets the number of elements in the formula. </summary>
 		public int Size {
 			get {
@@ -83,7 +83,7 @@ namespace ChemTools {
 			}
 			private set {}
 		}
-		
+
 		/// <returns> true iff other is a Formula and
 		/// has the same number of each element </returns>
 		public override bool Equals(object other) {
@@ -103,7 +103,7 @@ namespace ChemTools {
 			}
 			return false;
 		}
-		
+
 		/// <returns> Integer representation of this
 		///	object. Not guaranteed to be unique. </returns>
 		public override int GetHashCode() {
@@ -124,5 +124,5 @@ namespace ChemTools {
 			return sb.ToString();
 		}
 	}
-	
+
 }

@@ -9,12 +9,12 @@ namespace ChemTools {
 	/// Class for parsing strings to Formulas.
 	/// </summary>
 	public class FormulaParser {
-		
+
 		//the input string broken down into a character array
 		private char[] chars;
 		//index of next character
 		private int next;
-		
+
 		private FormulaParser(string str) {
 			next = 0;
 			chars =  str.ToCharArray();
@@ -119,5 +119,5 @@ namespace ChemTools {
 			return new FormulaParser(str).GetFormula();
 		}
 	}
-	
+
 }

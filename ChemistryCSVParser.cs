@@ -36,7 +36,7 @@ namespace ChemTools {
 		private string input;
 		//the posiion of the next character in the string
 		private int nextIndex;
-		
+
 		private ChemistryCSVParser(string str){
 			input = str;
 			nextIndex = 0;
@@ -72,5 +72,5 @@ namespace ChemTools {
 			return sb.ToString();
 		}
 	}
-	
+
 }

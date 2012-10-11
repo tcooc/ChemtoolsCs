@@ -5,11 +5,11 @@ namespace ChemTools {
 
 	/// <summary> USed for balancing equations. </summary>
 	public class EquationBalancer {
-		
+
 		private Equation equation;
 		private Formula[] left, right;
 		private int[] leftCoeff, rightCoeff;
-		
+
 		private EquationBalancer(Equation eq) {
 			equation = eq;
 			left = eq.Left;
@@ -17,7 +17,7 @@ namespace ChemTools {
 			right = eq.Right;
 			rightCoeff = eq.rightCoeff;
 		}
-		
+
 		/// <summary> Only method a program needs to use.
 		///	Returns true iff the balance is successful. </summary>
 		public static bool BalanceEquation(Equation eq) {
@@ -35,7 +35,7 @@ namespace ChemTools {
 			}
 			return equation.IsBalanced();
 		}
-		
+
 		//recursive brute-force
 		//tries all combinations between {1}{1}{1}... to {threshold}{threshold}{threshold}...
 		private void BruteForceBalance(int threshold, int index) {
@@ -52,7 +52,7 @@ namespace ChemTools {
 				BruteForceBalance(threshold, index + 1);
 			}
 		}
-		
+
 	}
-	
+
 }

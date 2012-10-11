@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 
 namespace ChemTools {
-	
+
 	/// <summary> Main class for the program. </summary>
 	public class ChemTools {
 		/// <summary> Standard data on elements 1 through 118 </summary>
@@ -26,7 +26,7 @@ namespace ChemTools {
 			List<Element> elements = ChemistryCSVParser.ParseString(ELEMENT_DATA);
 			tableInstance = new PeriodicTable(elements);
 		}
-		
+
 		/// <summary> Main method. Entry point. </summary>
 		public static void Main(string[] args) {
 			Initialize();
@@ -46,7 +46,7 @@ namespace ChemTools {
 				Console.WriteLine("Usage: chemtools formula/expression");
 			}
 		}
-		
+
 		/// <summary> Attempts to parse the string into a formula
 		/// and prints it out. </summary>
 		public static void CalculateFormula(string input) {
@@ -63,7 +63,7 @@ namespace ChemTools {
 				Console.WriteLine("Error interpreting formula.");
 			}
 		}
-		
+
 		/// <summary> Attempts to parse the string into an equation
 		/// and prints it out. </summary>
 		public static void CalculateEquation(string input) {
@@ -79,7 +79,7 @@ namespace ChemTools {
 					Console.WriteLine("{0} - {1} g/mol",
 					                  equation.Right[i], equation.Right[i].MolarMass);
 				}
-				
+
 				Console.WriteLine("Interpreted equation: {0}", equation);
 				//balance equation and print results
 				if(EquationBalancer.BalanceEquation(equation)){
@@ -94,5 +94,5 @@ namespace ChemTools {
 		}
 		
 	}
-	
+
 }

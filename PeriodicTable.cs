@@ -9,7 +9,7 @@ namespace ChemTools {
 	public class PeriodicTable {
 		const int NUMBER_ELEMENTS = 118;
 		private Element[] elements;
-		
+
 		/// <param name="eList"> List of elements in any order. </param>
 		public PeriodicTable(List<Element> eList) {
 			elements = new Element[NUMBER_ELEMENTS];
@@ -18,12 +18,12 @@ namespace ChemTools {
 				elements[e.Number - 1] = e;
 			}
 		}
-		
+
 		/// <summary> Uses the atomic number to get the corresponding Element </summary>
 		public Element GetElementByAtomicNumber(int i){
 			return elements[i - 1];
 		}
-		
+
 		/// <summary> Uses the symbol to get the corresponding Element </summary>
 		/// <example> GetElementBySymbol("He") returns a Element object that represents Helium </example>
 		/// <returns> The elemenent object, or null if not found </returns>
@@ -36,5 +36,5 @@ namespace ChemTools {
 			return null;
 		}
 	}
-	
+
 }

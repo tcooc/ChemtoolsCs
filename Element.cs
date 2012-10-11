@@ -2,9 +2,9 @@
  * @author tcooc
 **/
 using System.Text;
-	
+
 namespace ChemTools {
-	
+
 	/// <summary>
 	/// A chemical Element. Immutable.
 	/// </summary>
@@ -17,7 +17,7 @@ namespace ChemTools {
 		private int number;
 		//mass number i.e. 1.00784
 		private double mass;
-		
+
 		//forces immutability
 		/// <summary> Gets the symbol </summary>
 		/// <example> returns He for helium </example>
@@ -55,7 +55,7 @@ namespace ChemTools {
 			this.number = number;
 			this.mass = mass;
 		}
-		
+
 		/// <returns> true iff other is an Element and has the same atomic number. </returns>
 		public override bool Equals(object other) {
 			if(other is Element) {
@@ -63,12 +63,12 @@ namespace ChemTools {
 			}
 			return false;
 		}
-		
+
 		/// <returns> Unique integer representation of this element. </returns>
 		public override int GetHashCode() {
 			return number;
 		}
-		
+
 		/// <returns> string in format "symbol,name,number,mass" </returns>
 		public override string ToString() {
 			return new StringBuilder(symbol)

@@ -7,10 +7,10 @@ namespace ChemTools {
 
 	/// <summary> Represents a number of elements </summary>
 	public class NElements {
-		
+
 		private int n;
 		private Element element;
-		
+
 		/// <param name="n"> Number </param>
 		/// <param name="e"> The Element </param>
 		public NElements(int n, Element e) {
@@ -31,7 +31,7 @@ namespace ChemTools {
 				n = value;
 			}
 		}
-		
+
 		/// <summary> Gets the element. </summary>
 		public Element Element {
 			get {
@@ -49,19 +49,19 @@ namespace ChemTools {
 			}
 			return false;
 		}
-		
+
 		/// <returns> Integer representation
 		/// of this object. Not guaranteed unique. </returns>
 		public override int GetHashCode() {
 			return element.GetHashCode() ^ n;
 		}
-		
+
 		/// <returns> Symbol + Number (if Number is not 1) </returns>
 		public override string ToString() {
 			string number = (n == 1 ? "" : n.ToString());
 			return new StringBuilder(element.Symbol).Append(number).ToString();
 		}
-		
+
 	}
 
 }

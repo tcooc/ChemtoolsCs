@@ -8,14 +8,14 @@ namespace ChemTools {
 	/// <summary> represents a chemical equation, with reactants on the left
 	/// and products on the right, including coefficients for both </summary>
 	public class Equation {
-		
+
 		private Formula[] left;
 		/// <summary> Array of integers for the left coefficients. </summary>
 		public int[] leftCoeff;
 		private Formula[] right;
 		/// <summary> Array of integers for the right coefficients. </summary>
 		public int[] rightCoeff;
-		
+
 		/// <summary> Returns the left side of the equation </summary>
 		public Formula[] Left {
 			get { return left;}
@@ -76,7 +76,7 @@ namespace ChemTools {
 		public Formula CountMoleculesLeft() {
 			return CountMolecules(left, leftCoeff);
 		}
-		
+
 		/// <summary> Counts the number of all elements in the right side,
 		///	taking into account the coeficients before the formulas </summary>
 		/// <returns> Formula that contains the count. </returns>
@@ -89,7 +89,7 @@ namespace ChemTools {
 			return CountMoleculesLeft().Equals(CountMoleculesRight());
 		}
 
-		
+
 		/// <returns> String in form n1X1+n2X2+...=naXa+nbXb+... X1, Xa, ... are the formulas
 		/// ant n1, na, ... are the coefficients (or blank if the coefficient is 1) </returns>
 		/// <example> H2+O2=2H2O ToString() returns "H2+O2=2H2O" </example>
@@ -128,5 +128,5 @@ namespace ChemTools {
 			return sb.ToString();
 		}
 	}
-	
+
 }
