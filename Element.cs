@@ -20,25 +20,21 @@ namespace ChemTools {
 		/// <example> returns He for helium </example>
 		public string Symbol {
 			get { return symbol; }
-			private set {}
 		}
 		/// <summary> Gets the name </summary>
 		/// <example> returns Carbon for carbon </example>
 		public string Name {
 			get {return name; }
-			private set {}
 		}
 		/// <summary> Gets the number </summary>
 		/// <example> returns 2 for helium </example>
 		public int Number {
 			get { return number; }
-			private set {}
 		}
 		/// <summary> Gets the mass </summary>
 		/// <example> returns 1 for hydrogen </example>
 		public double Mass {
 			get { return mass; }
-			private set {}
 		}
 
 		/// <param name="symbol"> symbol of the element </param>

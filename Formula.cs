@@ -32,14 +32,12 @@ namespace ChemTools {
 				}
 				return mm;
 			}
-			private set {}
 		}
 
 		public Dictionary<Element, NElements> Elements {
 			get {
 				return elementMap;
 			}
-			private set {}
 		}
 
 		/// <summary> Merges this formula with other.
@@ -78,7 +76,6 @@ namespace ChemTools {
 			get {
 				return elementMap.Count;
 			}
-			private set {}
 		}
 
 		/// <returns> true iff other is a Formula and

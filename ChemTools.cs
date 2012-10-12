@@ -15,7 +15,6 @@ namespace ChemTools {
 			get {
 				return tableInstance;
 			}
-			private set {}
 		}
 
 		//initializes the periodic table
@@ -25,13 +24,13 @@ namespace ChemTools {
 			tableInstance = new PeriodicTable(elements);
 		}
 
-		/// <summary> Main method. Entry point. </summary>
+		/// <summary> Main method. Entry point. Beginning. The start. Initialization. </summary>
 		public static void Main(string[] args) {
 			Initialize();
 			//check for arguments
 			if(args.Length > 0) {
 				for(int i = 0; i < args.Length; i++){
-					//every argument is either a formula or equation
+					//every argument is either a formula/element-variant or equation
 					if(args[i].IndexOf(EquationParser.EQUATION_TOKEN) > -1) {
 						Console.WriteLine("\n{0,4} Equation:", i + 1);
 						CalculateEquation(args[i]);
@@ -41,21 +40,51 @@ namespace ChemTools {
 					}
 				}
 			} else {
-				Console.WriteLine("Usage: chemtools formula/expression");
+				Console.WriteLine("Usage: chemtools [formula/equation/element] [formula/equation/element] ...");
+				Console.WriteLine("Example: chemtools O H2O C4H10+O2=CO2+H2O 44.0gCO2");
 			}
 		}
 
-		/// <summary> Attempts to parse the string into a formula
+		/// <summary> Example usage.
+		/// Attempts to parse the string into a formula
 		/// and prints it out. </summary>
 		public static void CalculateFormula(string input) {
 			try {
-				Formula formula = FormulaParser.ParseFormula(input);
-				Console.WriteLine("Interpreted: {0:S}\n{1} g/mol", formula, formula.MolarMass);
-				if(formula.Size == 1) {
-					foreach(Element e in formula.Elements.Keys) {
-					Console.WriteLine("Element: {0}", formula.Elements[e].Element);
+				//start: module for handling mass
+				int startIndex = 0;
+				string number = "";
+				double grams = -1;
+				for(; startIndex < input.Length && (char.IsDigit(input, startIndex) || input[startIndex] == '.'); startIndex++) {
+					number += input[startIndex];
+				}
+				if(number.Length > 0) {
+					if(input[startIndex] == 'g') {
+						startIndex++;
+						grams = double.Parse(number);
+					} else {
+						throw new ArgumentException("Bad input format.");
 					}
 				}
+				//end
+
+				//start: main module for formula parsing
+				Formula formula = FormulaParser.ParseFormula(input.Substring(startIndex));
+				Console.WriteLine("Interpreted: {0:S}\n{1} g/mol", formula, formula.MolarMass);
+				//end
+
+				//start: module for handling mass (part 2)
+				if(grams > 0) {
+					Console.WriteLine("Mass: {0} g makes {1} mol", grams, grams / formula.MolarMass);
+				}
+				//end
+
+				//start: module for handling elements
+				if(formula.Size == 1) {
+					foreach(Element e in formula.Elements.Keys) {
+						Console.WriteLine("Element: {0}", formula.Elements[e].Element);
+					}
+				}
+				//end
 			} catch(Exception e) {
 				Console.WriteLine(e);
 				Console.WriteLine("Error interpreting formula.");
@@ -71,11 +100,11 @@ namespace ChemTools {
 				//print all formulas
 				for(int i = 0; i < equation.Left.Length; i++) {
 					Console.WriteLine("{0} - {1} g/mol",
-					                  equation.Left[i], equation.Left[i].MolarMass);
+					equation.Left[i], equation.Left[i].MolarMass);
 				}
 				for(int i = 0; i < equation.Right.Length; i++) {
 					Console.WriteLine("{0} - {1} g/mol",
-					                  equation.Right[i], equation.Right[i].MolarMass);
+					equation.Right[i], equation.Right[i].MolarMass);
 				}
 
 				Console.WriteLine("Interpreted equation: {0}", equation);

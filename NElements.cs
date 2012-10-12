@@ -34,7 +34,6 @@ namespace ChemTools {
 			get {
 				return element;
 			}
-			private set { }
 		}
 
 		/// <returns> true iff other is an NElement,

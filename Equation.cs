@@ -16,12 +16,10 @@ namespace ChemTools {
 		/// <summary> Returns the left side of the equation </summary>
 		public Formula[] Left {
 			get { return left;}
-			private set {}
 		}
 		/// <summary> Returns the right side of the equation </summary>
 		public Formula[] Right {
 			get { return right; }
-			private set {}
 		}
 
 		/// <param name="l"> Left side. </param>
