@@ -20,24 +20,24 @@ namespace ChemTools {
 		public static bool BalanceEquation(Equation eq) {
 			//creates a new instance to be thread safe
 			EquationBalancer balancer = new EquationBalancer(eq);
-			if(!balancer.equation.IsBalanced()) {
+			if(!balancer.equation.Balanced) {
 				balancer.BruteForceBalance(20, 0);
 			}
-			return balancer.equation.IsBalanced();
+			return balancer.equation.Balanced;
 		}
 
 		private bool Balance() {
-			if(!equation.IsBalanced()) {
+			if(!equation.Balanced) {
 				BruteForceBalance(20, 0);
 			}
-			return equation.IsBalanced();
+			return equation.Balanced;
 		}
 
 		//recursive brute-force
 		//tries all combinations between {1}{1}{1}... to {threshold}{threshold}{threshold}...
 		private void BruteForceBalance(int threshold, int index) {
 			//for loop that breaks out if the equation is balanced
-			for(int i = 1; !equation.IsBalanced() && i < threshold; i++) {
+			for(int i = 1; !equation.Balanced && i < threshold; i++) {
 				if(index < left.Length) {
 					leftCoeff[index] = i;
 				} else if(index < left.Length + right.Length) {

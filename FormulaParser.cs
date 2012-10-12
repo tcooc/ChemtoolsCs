@@ -21,7 +21,7 @@ namespace ChemTools {
 		//hydrates arent handled
 		private Formula GetFormula() {
 			Formula formula = new Formula();
-			while(Check()) {
+			while(BoundCheck) {
 				//end inner formula, return this
 				if(chars[next] == ')') {
 					Next();
@@ -46,7 +46,7 @@ namespace ChemTools {
 					}
 					int n = GetNumber();
 					formula.Add(new NElements(n, e));
-				//error or end of data
+					//error or end of data
 				} else {
 					break;
 				}
@@ -57,7 +57,7 @@ namespace ChemTools {
 		//gets an Element from a symbol starting from next
 		private Element GetSymbol() {
 			StringBuilder sb = new StringBuilder();
-			if(Check() && char.IsUpper(chars[next])){
+			if(BoundCheck && char.IsUpper(chars[next])){
 				sb.Append(chars[next]);
 				while(char.IsLower(Next())) {
 					sb.Append(chars[next]);
@@ -70,7 +70,7 @@ namespace ChemTools {
 		//gets a number (integer) that starts from next
 		private int GetNumber() {
 			StringBuilder sb = new StringBuilder();
-			if(Check() && char.IsDigit(chars[next])){
+			if(BoundCheck && char.IsDigit(chars[next])){
 				sb.Append(chars[next]);
 				while(char.IsDigit(Next())) {
 					sb.Append(chars[next]);
@@ -82,8 +82,10 @@ namespace ChemTools {
 
 		//returns true if next is within bounds
 		//and the next character is not a space
-		private bool Check() {
-			return next < chars.Length && chars[next] != ' ';
+		private bool BoundCheck {
+			get {
+				return next < chars.Length && chars[next] != ' ';
+			}
 		}
 
 		//gets the next character

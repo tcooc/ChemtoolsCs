@@ -68,20 +68,26 @@ namespace ChemTools {
 		/// <summary> Counts the number of all elements in the left side,
 		///	taking into account the coeficients before the formulas </summary>
 		/// <returns> Formula that contains the count. </returns>
-		public Formula CountMoleculesLeft() {
-			return CountMolecules(left, leftCoeff);
+		public Formula MoleculesLeft {
+			get {
+				return CountMolecules(left, leftCoeff);
+			}
 		}
 
 		/// <summary> Counts the number of all elements in the right side,
 		///	taking into account the coeficients before the formulas </summary>
 		/// <returns> Formula that contains the count. </returns>
-		public Formula CountMoleculesRight() {
-			return CountMolecules(right, rightCoeff);
+		public Formula MoleculesRight {
+			get {
+				return CountMolecules(right, rightCoeff);
+			}
 		}
 
 		/// <summary> Returns true iff the equation is balanced </summary>
-		public bool IsBalanced() {
-			return CountMoleculesLeft().Equals(CountMoleculesRight());
+		public bool Balanced {
+			get {
+				return MoleculesLeft.Equals(MoleculesRight);
+			}
 		}
 
 

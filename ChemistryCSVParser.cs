@@ -26,7 +26,7 @@ namespace ChemTools {
 		/// </example>
 		public static List<Element> ParseString(string str) {
 			//make an instance of this class and operate on it in order to be thread-safe
-			return new ChemistryCSVParser(str).Parse();
+			return new ChemistryCSVParser(str).ElementList;
 		}
 
 		//reference to the original input string
@@ -41,19 +41,21 @@ namespace ChemTools {
 
 		//actually does the parsing
 		//reads the data, creates a new Element, and adds it to the output list
-		private List<Element> Parse() {
-			List<Element> elements = new List<Element>();
-			int number;
-			double mass;
-			string name, symbol;
-			while(nextIndex < input.Length) {
-				number = int.Parse(ReadValue());
-				mass = double.Parse(ReadValue());
-				name = ReadValue();
-				symbol = ReadValue();
-				elements.Add(new Element(symbol, name, number, mass));
+		private List<Element> ElementList {
+			get {
+				List<Element> elements = new List<Element>();
+				int number;
+				double mass;
+				string name, symbol;
+				while(nextIndex < input.Length) {
+					number = int.Parse(ReadValue());
+					mass = double.Parse(ReadValue());
+					name = ReadValue();
+					symbol = ReadValue();
+					elements.Add(new Element(symbol, name, number, mass));
+				}
+				return elements;
 			}
-			return elements;
 		}
 
 		//reads from nextIndex until a comma (,) is reached
