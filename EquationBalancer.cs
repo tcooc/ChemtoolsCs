@@ -9,9 +9,9 @@ namespace ChemTools {
 
 		private EquationBalancer(Equation eq) {
 			equation = eq;
-			left = eq.Left;
+			left = eq.left;
 			leftCoeff = eq.leftCoeff;
-			right = eq.Right;
+			right = eq.right;
 			rightCoeff = eq.rightCoeff;
 		}
 

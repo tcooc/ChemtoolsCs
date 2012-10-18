@@ -12,7 +12,7 @@ namespace ChemTools {
 			elements = new Element[NUMBER_ELEMENTS];
 			//sorts the elements in the array based on element number
 			foreach(Element e in eList) {
-				elements[e.Number - 1] = e;
+				elements[e.number - 1] = e;
 			}
 		}
 
@@ -26,7 +26,7 @@ namespace ChemTools {
 		/// <returns> The elemenent object, or null if not found </returns>
 		public Element GetElementBySymbol(string symbol) {
 			foreach(Element e in elements) {
-				if(e.Symbol.Equals(symbol)) {
+				if(e.symbol.Equals(symbol)) {
 					return e;
 				}
 			}

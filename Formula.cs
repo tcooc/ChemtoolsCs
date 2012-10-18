@@ -12,7 +12,7 @@ namespace ChemTools {
 		//elementMap[e] = ne;
 		//and can later be retrieved by using
 		//elementMap[e]
-		private Dictionary<Element, NElements> elementMap = new Dictionary<Element, NElements>();
+		public readonly Dictionary<Element, NElements> elementMap = new Dictionary<Element, NElements>();
 
 		/// <summary> Default empty formula </summary>
 		public Formula() {}
@@ -28,15 +28,9 @@ namespace ChemTools {
 			get {
 				double mm = 0;
 				foreach(NElements ne in elementMap.Values) {
-					mm += ne.Number * ne.Element.Mass;
+					mm += ne.Number * ne.element.mass;
 				}
 				return mm;
-			}
-		}
-
-		public Dictionary<Element, NElements> Elements {
-			get {
-				return elementMap;
 			}
 		}
 
@@ -63,11 +57,11 @@ namespace ChemTools {
 		/// <summary> Adds one or more elements to the formula. </summary>
 		/// <example> H2 Add(O) results in H2O </example>
 		public void Add(NElements ne) {
-			if(elementMap.ContainsKey(ne.Element)) {
-				NElements ne2 = elementMap[ne.Element];
+			if(elementMap.ContainsKey(ne.element)) {
+				NElements ne2 = elementMap[ne.element];
 				ne2.Number += ne.Number;
 			} else {
-				elementMap.Add(ne.Element, ne);
+				elementMap.Add(ne.element, ne);
 			}
 		}
 
@@ -84,12 +78,12 @@ namespace ChemTools {
 			if(other is Formula) {
 				Formula f = (Formula) other;
 				foreach(NElements ne in elementMap.Values) {
-					if(!ne.Equals(f.elementMap[ne.Element])) {
+					if(!ne.Equals(f.elementMap[ne.element])) {
 						return false;
 					}
 				}
 				foreach(NElements ne in f.elementMap.Values) {
-					if(!ne.Equals(elementMap[ne.Element])) {
+					if(!ne.Equals(elementMap[ne.element])) {
 						return false;
 					}
 				}

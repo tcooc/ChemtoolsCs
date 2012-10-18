@@ -6,21 +6,12 @@ namespace ChemTools {
 	/// and products on the right, including coefficients for both </summary>
 	public class Equation {
 
-		private Formula[] left;
+		public readonly Formula[] left;
 		/// <summary> Array of integers for the left coefficients. </summary>
-		public int[] leftCoeff;
-		private Formula[] right;
+		public readonly int[] leftCoeff;
+		public readonly Formula[] right;
 		/// <summary> Array of integers for the right coefficients. </summary>
-		public int[] rightCoeff;
-
-		/// <summary> Returns the left side of the equation </summary>
-		public Formula[] Left {
-			get { return left;}
-		}
-		/// <summary> Returns the right side of the equation </summary>
-		public Formula[] Right {
-			get { return right; }
-		}
+		public readonly int[] rightCoeff;
 
 		/// <param name="l"> Left side. </param>
 		/// <param name="r"> Right side. </param>

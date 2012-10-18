@@ -5,8 +5,8 @@ namespace ChemTools {
 	/// <summary> Represents a number of elements </summary>
 	public class NElements {
 
+		public readonly Element element;
 		private int n;
-		private Element element;
 
 		/// <param name="n"> Number </param>
 		/// <param name="e"> The Element </param>
@@ -29,13 +29,6 @@ namespace ChemTools {
 			}
 		}
 
-		/// <summary> Gets the element. </summary>
-		public Element Element {
-			get {
-				return element;
-			}
-		}
-
 		/// <returns> true iff other is an NElement,
 		/// has the same Number, and the same Element </returns>
 		public override bool Equals(object other){
@@ -55,7 +48,7 @@ namespace ChemTools {
 		/// <returns> Symbol + Number (if Number is not 1) </returns>
 		public override string ToString() {
 			string number = (n == 1 ? "" : n.ToString());
-			return new StringBuilder(element.Symbol).Append(number).ToString();
+			return new StringBuilder(element.symbol).Append(number).ToString();
 		}
 
 	}

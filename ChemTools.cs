@@ -80,8 +80,8 @@ namespace ChemTools {
 
 				//start: module for handling elements
 				if(formula.Size == 1) {
-					foreach(Element e in formula.Elements.Keys) {
-						Console.WriteLine("Element: {0}", formula.Elements[e].Element);
+					foreach(Element e in formula.elementMap.Keys) {
+						Console.WriteLine("Element: {0}", formula.elementMap[e].element);
 					}
 				}
 				//end
@@ -98,13 +98,13 @@ namespace ChemTools {
 				Equation equation = EquationParser.ParseEquation(input);
 
 				//print all formulas
-				for(int i = 0; i < equation.Left.Length; i++) {
+				for(int i = 0; i < equation.left.Length; i++) {
 					Console.WriteLine("{0} - {1} g/mol",
-					equation.Left[i], equation.Left[i].MolarMass);
+					equation.left[i], equation.left[i].MolarMass);
 				}
-				for(int i = 0; i < equation.Right.Length; i++) {
+				for(int i = 0; i < equation.right.Length; i++) {
 					Console.WriteLine("{0} - {1} g/mol",
-					equation.Right[i], equation.Right[i].MolarMass);
+					equation.right[i], equation.right[i].MolarMass);
 				}
 
 				Console.WriteLine("Interpreted equation: {0}", equation);

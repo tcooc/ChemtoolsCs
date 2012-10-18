@@ -7,35 +7,13 @@ namespace ChemTools {
 	/// </summary>
 	public class Element {
 		//i.e. H
-		private string symbol;
+		public readonly string symbol;
 		//i.e. Hydrogen
-		private string name;
+		public readonly string name;
 		//atmoic number, i.e. 1
-		private int number;
+		public readonly int number;
 		//mass number i.e. 1.00784
-		private double mass;
-
-		//forces immutability
-		/// <summary> Gets the symbol </summary>
-		/// <example> returns He for helium </example>
-		public string Symbol {
-			get { return symbol; }
-		}
-		/// <summary> Gets the name </summary>
-		/// <example> returns Carbon for carbon </example>
-		public string Name {
-			get {return name; }
-		}
-		/// <summary> Gets the number </summary>
-		/// <example> returns 2 for helium </example>
-		public int Number {
-			get { return number; }
-		}
-		/// <summary> Gets the mass </summary>
-		/// <example> returns 1 for hydrogen </example>
-		public double Mass {
-			get { return mass; }
-		}
+		public readonly double mass;
 
 		/// <param name="symbol"> symbol of the element </param>
 		/// <param name="name"> name of the element </param>
