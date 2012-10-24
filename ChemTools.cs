@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ChemTools.Gui;
 
 namespace ChemTools {
 
@@ -25,30 +26,44 @@ namespace ChemTools {
 		}
 
 		/// <summary> Main method. Entry point. Beginning. The start. Initialization. </summary>
+		[STAThread] //single threaded apartment
 		public static void Main(string[] args) {
 			Initialize();
 			//check for arguments
 			if(args.Length > 0) {
+				if("-gui".Equals(args[0])) {
+					ChemtoolsGui.Initialize();
+					return;
+				}
 				for(int i = 0; i < args.Length; i++){
-					//every argument is either a formula/element-variant or equation
-					if(args[i].IndexOf(EquationParser.EQUATION_TOKEN) > -1) {
-						Console.WriteLine("\n{0,4} Equation:", i + 1);
-						CalculateEquation(args[i]);
-					} else {
-						Console.WriteLine("\n{0,4} Formula:", i + 1);
-						CalculateFormula(args[i]);
-					}
+					Console.WriteLine();
+					Console.WriteLine(GetOutputString(args[i]));
 				}
 			} else {
-				Console.WriteLine("Usage: chemtools [formula/equation/element] [formula/equation/element] ...");
+				Console.WriteLine("Usage: chemtools (arguments) [formula/equation/element]...");
+				Console.WriteLine("Arguments:");
+				Console.WriteLine("-gui - starts gui, ignores other arguments");
 				Console.WriteLine("Example: chemtools O H2O C4H10+O2=CO2+H2O 44.0gCO2");
 			}
+		}
+
+		public static string GetOutputString(string input) {
+			string output = "";
+			if(input.IndexOf(EquationParser.EQUATION_TOKEN) > -1) {
+					output += "Equation:\n";
+					output += CalculateEquation(input);
+				} else {
+					output += "Formula:\n";
+					output += CalculateFormula(input);
+			}
+			return output;
 		}
 
 		/// <summary> Example usage.
 		/// Attempts to parse the string into a formula
 		/// and prints it out. </summary>
-		public static void CalculateFormula(string input) {
+		public static string CalculateFormula(string input) {
+			string output = "";
 			try {
 				//start: module for handling mass
 				int startIndex = 0;
@@ -69,55 +84,62 @@ namespace ChemTools {
 
 				//start: main module for formula parsing
 				Formula formula = FormulaParser.ParseFormula(input.Substring(startIndex));
-				Console.WriteLine("Interpreted: {0:S}\n{1} g/mol", formula, formula.MolarMass);
-				//end
 
-				//start: module for handling mass (part 2)
-				if(grams > 0) {
-					Console.WriteLine("Mass: {0} g makes {1} mol", grams, grams / formula.MolarMass);
+				if(formula.Size > 0) {
+					output += string.Format("Interpreted: {0}\n{1} g/mol\n", formula, formula.MolarMass);
+					//end
+
+					//start: module for handling mass (part 2)
+					if(grams > 0) {
+						output += string.Format("Mass: {0} g\n", grams);
+						output += string.Format("Moles: {0} mol\n", grams / formula.MolarMass);
+					}
 				}
 				//end
 
 				//start: module for handling elements
 				if(formula.Size == 1) {
 					foreach(Element e in formula.elementMap.Keys) {
-						Console.WriteLine("Element: {0}", formula.elementMap[e].element);
+						output += string.Format("Element:\n{0}, {1}\nNumber: {2}\nMass: {3}", e.symbol, e.name, e.number, e.mass);
 					}
 				}
 				//end
 			} catch(Exception e) {
 				Console.WriteLine(e);
-				Console.WriteLine("Error interpreting formula.");
+				Console.WriteLine("Invalid formula.");
 			}
+			return output;
 		}
 
 		/// <summary> Attempts to parse the string into an equation
 		/// and prints it out. </summary>
-		public static void CalculateEquation(string input) {
+		public static string CalculateEquation(string input) {
+			string output = "";
 			try {
 				Equation equation = EquationParser.ParseEquation(input);
 
 				//print all formulas
 				for(int i = 0; i < equation.left.Length; i++) {
-					Console.WriteLine("{0} - {1} g/mol",
+					output += string.Format("{0} - {1} g/mol\n",
 					equation.left[i], equation.left[i].MolarMass);
 				}
 				for(int i = 0; i < equation.right.Length; i++) {
-					Console.WriteLine("{0} - {1} g/mol",
+					output += string.Format("{0} - {1} g/mol\n",
 					equation.right[i], equation.right[i].MolarMass);
 				}
 
-				Console.WriteLine("Interpreted equation: {0}", equation);
+				output += string.Format("Interpreted equation:\n{0}\n", equation);
 				//balance equation and print results
 				if(EquationBalancer.BalanceEquation(equation)){
-					Console.WriteLine("Balanced equation: {0}", equation);
+					output += string.Format("Balanced equation:\n{0}\n", equation);
 				} else {
-					Console.WriteLine("Balance failed.");
+					Console.WriteLine("Unbalanced.");
 				}
 			} catch(Exception e) {
 				Console.WriteLine(e);
-				Console.WriteLine("Error interpreting equation.");
+				Console.WriteLine("Invalid equation.");
 			}
+			return output;
 		}
 		
 	}
