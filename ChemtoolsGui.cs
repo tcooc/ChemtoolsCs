@@ -14,11 +14,11 @@ namespace ChemTools.Gui {
 		private TextBox input;
 		private RichTextBox output, savedOutput;
 		private ListBox savedList;
-		private Button btnAdd, btnDelete, btnClear;
+		private Button btnAdd, btnDelete, btnClear, btnReset;
 
 		private ChemtoolsGui() {
-			Text = "ChemTools";
-			Size = new Size(640, 640);
+			this.Text = "ChemTools";
+			this.Size = new Size(640, 640);
 
 			input = new TextBox();
 			input.Location = new Point(20, 20);
@@ -33,12 +33,12 @@ namespace ChemTools.Gui {
 			savedList = new ListBox();
 			savedList.Location = new Point(300, 20);
 			savedList.Size = new Size(300, 120);
-			savedList.SelectedIndexChanged += new EventHandler(SelectChange);
+			savedList.SelectedIndexChanged += new EventHandler(ListSelectChange);
+			savedList.KeyDown += new KeyEventHandler(ListKeyDown);
 			savedList.BeginUpdate();
 			savedList.Items.Add("H2O");
 			savedList.Items.Add("CO2");
 			savedList.Items.Add("C4H10+O2=CO2+H2O");
-			savedList.Items.Add("U9000");
 			savedList.Items.Add("44.0095gCO2");
 			savedList.EndUpdate();
 
@@ -55,11 +55,16 @@ namespace ChemTools.Gui {
 			btnDelete.Location = new Point(180, 100);	
 			btnDelete.Text = "Delete";
 			btnDelete.Click += new EventHandler(DeleteClick);
-						
+
 			btnClear = new Button();
 			btnClear.Location = new Point(20, 50);
 			btnClear.Text = "Clear";
 			btnClear.Click += new EventHandler(ClearClick);
+
+			btnReset = new Button();
+			btnReset.Location = new Point(20, 100);
+			btnReset.Text = "Reset All";
+			btnReset.Click += new EventHandler(ResetClick);
 
 			this.Controls.Add(input);
 			this.Controls.Add(output);
@@ -68,6 +73,7 @@ namespace ChemTools.Gui {
 			this.Controls.Add(btnAdd);
 			this.Controls.Add(btnDelete);
 			this.Controls.Add(btnClear);
+			this.Controls.Add(btnReset);
 		}
 
 		private void InputChanged(object sender, EventArgs e) {
@@ -75,7 +81,9 @@ namespace ChemTools.Gui {
 		}
 		
 		private void InputKeyDown(object sender, KeyEventArgs e) {
-		
+			if(e.KeyCode == Keys.Enter) {
+				savedList.Items.Add(input.Text);
+			}
 		}
 		
 		private void ClearClick(object sender, EventArgs e) {
@@ -91,12 +99,23 @@ namespace ChemTools.Gui {
 				}
 			}
 		}
-		
+
 		private void AddClick(object sender, EventArgs e) {
 			savedList.Items.Add(input.Text);
 		}
 
-		private void SelectChange(object sender, EventArgs e) {
+		private void ResetClick(object sender, EventArgs e) {
+			ClearClick(null, null);
+			savedList.Items.Clear();
+		}
+
+		private void ListKeyDown(object sender, KeyEventArgs e) {
+			if(e.KeyCode == Keys.Delete) {
+				DeleteClick(null, null);
+			}
+		}
+
+		private void ListSelectChange(object sender, EventArgs e) {
 			int selected = savedList.SelectedIndex;
 			if(selected > -1) {
 				savedOutput.Text = ChemTools.GetOutputString(
