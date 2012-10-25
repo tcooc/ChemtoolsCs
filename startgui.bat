@@ -1,0 +1,2 @@
+@ECHO OFF
+chemtools -gui

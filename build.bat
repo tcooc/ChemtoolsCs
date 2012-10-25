@@ -1,2 +1,2 @@
 @ECHO OFF
-csc /optimize+ -out:chemtools.exe *.cs
+csc /optimize+ /win32icon:icon.ico -out:chemtools.exe *.cs

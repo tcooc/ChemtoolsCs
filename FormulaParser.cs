@@ -34,6 +34,7 @@ namespace ChemTools {
 					Formula f1 = GetFormula();
 					//gets the number after the closing parens
 					//i.e. get 7 from (CO2)7
+					if(f1 == null ) return null;
 					int n = GetNumber();
 					//adds it to the main formula
 					formula.MergeFormula(f1.Factor(n));
@@ -48,7 +49,7 @@ namespace ChemTools {
 					formula.Add(new NElements(n, e));
 					//error or end of data
 				} else {
-					break;
+					return null;
 				}
 			}
 			return formula;

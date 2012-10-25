@@ -78,12 +78,14 @@ namespace ChemTools {
 			if(other is Formula) {
 				Formula f = (Formula) other;
 				foreach(NElements ne in elementMap.Values) {
-					if(!ne.Equals(f.elementMap[ne.element])) {
+					if(!f.elementMap.ContainsKey(ne.element) ||
+						!ne.Equals(f.elementMap[ne.element])) {
 						return false;
 					}
 				}
 				foreach(NElements ne in f.elementMap.Values) {
-					if(!ne.Equals(elementMap[ne.element])) {
+					if(!f.elementMap.ContainsKey(ne.element) ||
+						!ne.Equals(elementMap[ne.element])) {
 						return false;
 					}
 				}

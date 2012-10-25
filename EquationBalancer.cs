@@ -49,7 +49,6 @@ namespace ChemTools {
 				BruteForceBalance(threshold, index + 1);
 			}
 		}
-
 	}
 
 }

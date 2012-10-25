@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace ChemTools {
@@ -23,10 +24,16 @@ namespace ChemTools {
 			//copies the formulas instead of referencing
 			//(reduces side-effects of using Equation class)
 			for(int i = 0; i < l.Length; i++) {
+				if(l[i] == null || l[i].Size == 0) {
+					throw new ArgumentException("Invalid formula in equation.");
+				}
 				left[i] = new Formula(l[i]);
 				leftCoeff[i] = 1;
 			}
 			for(int i = 0; i < r.Length; i++) {
+				if(r[i] == null || r[i].Size == 0) {
+					throw new ArgumentException("Invalid formula in equation.");
+				}
 				right[i] = new Formula(r[i]);
 				rightCoeff[i] = 1;
 			}
@@ -80,7 +87,6 @@ namespace ChemTools {
 				return MoleculesLeft.Equals(MoleculesRight);
 			}
 		}
-
 
 		/// <returns> String in form n1X1+n2X2+...=naXa+nbXb+... X1, Xa, ... are the formulas
 		/// ant n1, na, ... are the coefficients (or blank if the coefficient is 1) </returns>
